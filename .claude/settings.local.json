@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan make:migration create_exercises_table --create=exercises 2>&1)",
+      "Bash(php artisan make:migration create_workout_sessions_table --create=workout_sessions 2>&1)",
+      "Bash(php artisan make:migration create_session_rows_table --create=session_rows 2>&1)",
+      "Bash(php artisan migrate 2>&1)",
+      "mcp__laravel-boost__tinker",
+      "Bash(php artisan db:seed --class=ExerciseSeeder 2>&1)",
+      "Bash(composer show barryvdh/laravel-dompdf 2>&1 | head -3)",
+      "mcp__laravel-boost__list-routes",
+      "Bash(find /home/nebula/ironlog -maxdepth 3 -name \"tailwind.config.*\" 2>/dev/null | grep -v node_modules | grep -v vendor)",
+      "Bash(npx tsc --noEmit 2>&1 | head -60)",
+      "Bash(npx vite build 2>&1 | tail -20)",
+      "Bash(php artisan route:list --path=workout-sessions --path=history --path=prs --path=progress --path=tools --path=library 2>&1)",
+      "Bash(php artisan test 2>&1)",
+      "Bash(PGPASSWORD=ironlog psql -U ironlog -h 127.0.0.1 -c \"CREATE DATABASE ironlog_test\" 2>&1)",
+      "Bash(sudo -u postgres psql -c \"CREATE DATABASE ironlog_test OWNER ironlog\" 2>&1)",
+      "Bash(php artisan test --filter=\"personalRecords returns highest\" 2>&1 | tail -30)",
+      "Bash(php artisan test --filter=\"WorkoutSessionControllerTest\" 2>&1 | tail -40)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}
