@@ -86,14 +86,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pgsql, mbstring, xml, curl, zip, bcmath
+          tools: composer:v2
+          coverage: none
+
       - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: npm
 
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
       - name: Install Node dependencies
         run: npm ci
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
       - name: Build frontend assets
         run: npm run build
