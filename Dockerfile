@@ -21,8 +21,4 @@ RUN npm ci && npm run build
 
 EXPOSE 8080
 
-CMD php artisan migrate --force \
-    && php artisan db:seed --class=ExerciseSeeder --force \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan serve --host=0.0.0.0 --port=8080
+CMD until php artisan migrate --force 2>/dev/null; do echo "Waiting for DB..."; sleep 3; done && php artisan db:seed --class=ExerciseSeeder --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8080
